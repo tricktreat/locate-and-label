@@ -33,6 +33,9 @@ Data format:
        "org_id": "MARKETVIEW_20041220.1537"
 }
 ```
+
+The `ltokens` contains the tokens from the previous sentence. And The `rtokens` contains the tokens from the next sentence.
+
 Due to the license of LDC, we cannot directly release our preprocessed datasets of ACE04, ACE05 and KBP17. We only release the preprocessed GENIA dataset and the corresponding word vectors and dictionary. Download them from [here](https://drive.google.com/file/d/13Lf_pQ1-QNI94EHlvtcFhUcQeQeUDq8l/view?usp=sharing). 
 
 If you need other datasets, please contact me (`syl@zju.edu.cn`) by email. Note that you need to state your identity and prove that you have obtained the LDC license.
@@ -44,7 +47,7 @@ The word vectors used in our experiments:
 + BioWord2Vec for GENIA: https://github.com/cambridgeltl/BioNLP-2016
 + GloVe for other datasets: http://nlp.stanford.edu/data/glove.6B.zip
 
-Download and extract the wordvecs from above links, save GloVe in `../glove` and BioWord2Vec in `./biovec`.
+Download and extract the wordvecs from above links, save GloVe in `../glove` and BioWord2Vec in `../biovec`.
 
 ```bash
 mkdir ../glove
@@ -53,7 +56,7 @@ mv glove.6B.100d.txt ../glove
 mv PubMed-shuffle-win-30.txt ../biovec
 ```
 
-Note: the BioWord2Vec needs to be converted to GloVe format. Refer to [this](https://radimrehurek.com/gensim/scripts/glove2word2vec.html).
+Note: the BioWord2Vec downloaded from the above link is word2vec binary format, and needs to be converted to GloVe format. Refer to [this](https://radimrehurek.com/gensim/scripts/glove2word2vec.html).
 
 ## Example
 
@@ -63,6 +66,8 @@ Note: the BioWord2Vec needs to be converted to GloVe format. Refer to [this](htt
 ```bash
 python identifier.py train --config configs/example.conf
 ```
+
+Note: You should edit this [line](https://github.com/tricktreat/locate-and-label/blob/3697adeaf36100f601366b233614699ae5ded965/config_reader.py#L17) in `config_reader.py` according to the actual number of GPUs. 
 
 ### Evaluation
 
